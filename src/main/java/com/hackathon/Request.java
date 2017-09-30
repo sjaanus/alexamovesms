@@ -1,29 +1,23 @@
 package com.hackathon;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by Jaanus on 30.09.2017.
  */
-
-//@Getter
-//@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
-	private Message message;
+	private Body body;
 
-	public Message getMessage() {
-		return message;
+	public Body getBody() {
+		return body;
 	}
 
-	public void setMessage(Message message) {
-		this.message = message;
-	}
-	private String test;
-
-
-	public String getTest() {
-		return test;
+	public void setBody(Body body) {
+		this.body = body;
 	}
 
-	public void setTest(String test) {
-		this.test = test;
+	public Request() {
+
 	}
 }

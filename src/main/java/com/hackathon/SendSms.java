@@ -7,33 +7,42 @@ import com.amazonaws.services.sns.AmazonSNSClient;
 import com.amazonaws.services.sns.model.MessageAttributeValue;
 import com.amazonaws.services.sns.model.PublishRequest;
 import com.amazonaws.services.sns.model.PublishResult;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Jaanus on 30.09.2017.
  */
-public class SendSms implements RequestHandler<Request, String> {
+public class SendSms implements RequestHandler<Map<String, Object> , String> {
 	private final static String ACCESS_KEY = "ACCESS_KEY";
 	private final static String SECRET_KEY = "SECRET_KEY";
 	private final static String PHONE = "PHONE";
 
-	public String handleRequest(Request request, Context context) {
-		System.out.println(request.getMessage());
-		System.out.println(request.getMessage().getContent());
-		AmazonSNSClient snsClient = new AmazonSNSClient(new BasicAWSCredentials(System.getenv(ACCESS_KEY),
-				System.getenv(SECRET_KEY)));
-		String message = "My SMS message";
-		String phoneNumber = System.getenv(PHONE);
-		Map<String, MessageAttributeValue> smsAttributes =
-				new HashMap<String, MessageAttributeValue>();
+	public String handleRequest(Map<String, Object> request, Context context) {
 
-		sendSMSMessage(snsClient, request.getMessage().getContent(), phoneNumber, smsAttributes);
+		String body = (String)request.get("body");
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			Body bodyObject  = mapper.readValue(body, Body.class);
+
+			AmazonSNSClient snsClient = new AmazonSNSClient(new BasicAWSCredentials(System.getenv(ACCESS_KEY),
+					System.getenv(SECRET_KEY)));
+			String phoneNumber = System.getenv(PHONE);
+			Map<String, MessageAttributeValue> smsAttributes =
+					new HashMap<String, MessageAttributeValue>();
+
+			sendSMSMessage(snsClient, bodyObject.getMessage().getContent(), phoneNumber, smsAttributes);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		return "hello world";
 	}
 
-	public String smsHandler(Request input, Context context) {
+	public String smsHandler(Body input, Context context) {
 
 
 		return "hello world";
