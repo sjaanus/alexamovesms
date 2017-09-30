@@ -38,14 +38,7 @@ public class SendSms implements RequestHandler<Map<String, Object> , String> {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		return "hello world";
-	}
-
-	public String smsHandler(Body input, Context context) {
-
-
-		return "hello world";
+		return "";
 	}
 
 	public void sendSMSMessage(AmazonSNSClient snsClient, String message,
