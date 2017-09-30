@@ -7,5 +7,5 @@ alexaMove SMS is a Java implementation of sending SMS from Salemove Operator to 
 Clone the project and build it with maven
 
 ```maven
-mvn assembly:assembly -DdescriptorId=jar-with-dependencies package
+mvn package
 ```
