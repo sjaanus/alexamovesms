@@ -15,15 +15,21 @@ import java.util.Map;
  * Created by Jaanus on 30.09.2017.
  */
 public class SendSms {
-	public String smsHandler(Map<String,Object> input, Context context) {
-		AmazonSNSClient snsClient = new AmazonSNSClient(new BasicAWSCredentials(System.getenv("ACCESS_KEY"),
-				System.getenv("SECRET_KEY")));
-		String message = "My SMS message";
-		String phoneNumber = System.getenv("PHONE");
-		Map<String, MessageAttributeValue> smsAttributes =
-				new HashMap<String, MessageAttributeValue>();
+	private final static String ACCESS_KEY = "ACCESS_KEY";
+	private final static String SECRET_KEY = "SECRET_KEY";
+	private final static String PHONE = "PHONE";
 
-		sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
+	public String smsHandler(Request input, Context context) {
+		System.out.println(input.getMessage());
+		System.out.println(input.getMessage().getContent());
+//		AmazonSNSClient snsClient = new AmazonSNSClient(new BasicAWSCredentials(System.getenv(ACCESS_KEY),
+//				System.getenv(SECRET_KEY)));
+//		String message = "My SMS message";
+//		String phoneNumber = System.getenv(PHONE);
+//		Map<String, MessageAttributeValue> smsAttributes =
+//				new HashMap<String, MessageAttributeValue>();
+//
+//		sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
 
 		return "hello world";
 	}
