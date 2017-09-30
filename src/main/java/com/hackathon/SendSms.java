@@ -2,7 +2,6 @@ package com.hackathon;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.sns.AmazonSNSClient;
 import com.amazonaws.services.sns.model.MessageAttributeValue;
@@ -48,6 +47,5 @@ public class SendSms implements RequestHandler<Request, String> {
 				.withMessageAttributes(smsAttributes));
 		System.out.println(result); // Prints the message ID.
 	}
-
 
 }
