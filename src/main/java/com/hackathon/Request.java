@@ -1,17 +1,21 @@
 package com.hackathon;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * Created by Jaanus on 30.09.2017.
  */
+
 //@Getter
 //@Setter
 public class Request {
-	@JsonProperty("message")
 	private Message message;
+
+	public Message getMessage() {
+		return message;
+	}
+
+	public void setMessage(Message message) {
+		this.message = message;
+	}
 	private String test;
 
 
@@ -21,13 +25,5 @@ public class Request {
 
 	public void setTest(String test) {
 		this.test = test;
-	}
-
-	public Message getMessage() {
-		return message;
-	}
-
-	public void setMessage(Message message) {
-		this.message = message;
 	}
 }
